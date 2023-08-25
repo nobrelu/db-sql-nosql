@@ -41,9 +41,12 @@ jobs:
           template-path: .github/ISSUE_TEMPLATE/teste.yml # optional but recommended
 
       - name: Print the fields
-        run: echo "${PARSER_FIELDS}"
-        env:
-          PARSER_FIELDS: ${{ steps.issue-parser.outputs.jsonString }}
+        run: 
+          # echo "${PARSER_FIELDS}"
+           echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+        #env:
+          #PARSER_FIELDS: ${{ steps.issue-parser.outputs.jsonString }}
           
       - name: Check params
         id: check-params
@@ -60,13 +63,13 @@ jobs:
       - name: Define Params
         id: params-defined
         run:
-          echo "teste= ${{ fromJSON(steps.check-params.outputs.result).nome }} >> $GITHUB_OUTPUT
+          #echo "teste= ${{ fromJSON(steps.check-params.outputs.result).nome }} >> $GITHUB_OUTPUT
           echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
           echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
         env: 
           CONTACT: ${{ steps.check-params.outputs.CONTATO }}
           NAME: ${{ steps.check-params.outputs.NOME }}
-          teste: ${{ fromJSON(steps.check-params.outputs.result).nome }} 
+          #teste: ${{ fromJSON(steps.check-params.outputs.result).nome }} 
 
 
 
