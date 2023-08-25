@@ -52,7 +52,7 @@ jobs:
         run:
           #echo "CONTATO= ${{ steps.issue-parser.outputs.issueparser_contact }}" >> $GITHUB_OUTPUT
           #echo "ISSUE_FORM = ${{ steps.issue-parser.outputs.issueparser_nome }}" >> $GITHUB_OUTPUT
-          echo "ISSUE_FORM = ${{ steps.issue-parser.outputs.jsonString}}" >> $GITHUB_OUTPUT
+          echo "ISSUE_FORM = JSON.parse(${{ steps.issue-parser.outputs.jsonString}}) " >> $GITHUB_OUTPUT
         env: 
           #CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
           #NAME: ${{ steps.issue-parser.outputs.issueparser_nome }}
