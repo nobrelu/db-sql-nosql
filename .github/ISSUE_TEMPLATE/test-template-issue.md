@@ -5,6 +5,10 @@ title: 'Teste'
 labels: 'auto'
 ---
 body:
+  - type: markdown
+    attributes:
+      value: "teste"
+    
   - type: textarea
     id: teste
     attributes:
