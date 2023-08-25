@@ -43,7 +43,7 @@ jobs:
       - name: Print the fields
         run: 
           # echo "${PARSER_FIELDS}"
-           echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
+          echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
           echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
         #env:
           #PARSER_FIELDS: ${{ steps.issue-parser.outputs.jsonString }}
