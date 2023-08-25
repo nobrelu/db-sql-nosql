@@ -44,20 +44,35 @@ jobs:
           PARSER_FIELDS: ${{ steps.issue-parser.outputs.jsonString }}
           
       - name: Check params
+        #uses: actions/github-script@v6
         id: check-params
-        run:
-          echo "CONTATO= ${{ steps.issue-parser.outputs.issueparser_contact }}" >> $GITHUB_OUTPUT
-          echo "NOME = ${{ steps.issue-parser.outputs.issueparser_nome }}" >> $GITHUB_OUTPUT
+        run:          
+          const issueForm = JSON.parse(process.env.ISSUE_FORM)
+          const CONTATO = issueForm.contact
+          const NOME = issueForm.nome
+        #run:
+          #echo "CONTATO= ${{ steps.issue-parser.outputs.issueparser_contact }}" >> $GITHUB_OUTPUT
+          #echo "NOME = ${{ steps.issue-parser.outputs.issueparser_nome }}" >> $GITHUB_OUTPUT
         env: 
-          CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
-          NAME: ${{ steps.issue-parser.outputs.issueparser_nome }}
+          #CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
+          #NAME: ${{ steps.issue-parser.outputs.issueparser_nome }}
+          ISSUE_FORM: ${{ steps.issue-parser.outputs.jsonString }}
 
+          
       - name: Define Params
         id: params-defined
         run:
           echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
-          echo "CONTATO= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
+          echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
         env: 
           CONTACT: ${{ steps.check-params.outputs.CONTATO }}
           NAME: ${{ steps.check-params.outputs.NOME }}
+
+
+
+
+
+
+          
+
 
