@@ -32,10 +32,12 @@ jobs:
         run: |
           echo "First output"
           echo "Second output"
+          
       - name: Parse Issue Form
         uses: stefanbuck/github-issue-parser@v3
         id: issue-parser
         with:
+          issue-body: ${{ github.event.issue.body }}
           template-path: .github/ISSUE_TEMPLATE/teste.yml # optional but recommended
 
       - name: Print the fields
@@ -45,18 +47,14 @@ jobs:
           
       - name: Check params
         id: check-params
-        #run:          
-          #const issueForm = JSON.parse(process.env.ISSUE_FORM)
-          #const CONTATO = issueForm.contact
-          #const NOME = issueForm.nome
         run:
-          #echo "CONTATO= ${{ steps.issue-parser.outputs.issueparser_contact }}" >> $GITHUB_OUTPUT
-          #echo "ISSUE_FORM = ${{ steps.issue-parser.outputs.issueparser_nome }}" >> $GITHUB_OUTPUT
-          echo "ISSUE_FORM = JSON.parse(${{ steps.issue-parser.outputs.jsonString}}) " >> $GITHUB_OUTPUT
+          echo "CONTATO= ${{ steps.issue-parser.outputs.issueparser_contact }}" >> $GITHUB_OUTPUT
+          echo "NOME= ${{ steps.issue-parser.outputs.issueparser_nome }}" >> $GITHUB_OUTPUT
+         
         env: 
-          #CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
-          #NAME: ${{ steps.issue-parser.outputs.issueparser_nome }}
-          ISSUE_FORM: ${{ steps.issue-parser.outputs.jsonString }}
+          CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
+          NAME: ${{ steps.issue-parser.outputs.issueparser_nome }}
+          #ISSUE_FORM: ${{ steps.issue-parser.outputs.jsonString }}
 
           
       #- name: Define Params
