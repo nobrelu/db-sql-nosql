@@ -57,14 +57,14 @@ jobs:
           #ISSUE_FORM: ${{ steps.issue-parser.outputs.jsonString }}
 
           
-      #- name: Define Params
-        #id: params-defined
-        #run:
-          #echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
-          #echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
-        #env: 
-          #CONTACT: ${{ steps.check-params.outputs.CONTATO }}
-          #NAME: ${{ steps.check-params.outputs.NOME }}
+      - name: Define Params
+        id: params-defined
+        run:
+          echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
+          echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
+        env: 
+          CONTACT: ${{ steps.check-params.outputs.CONTATO }}
+          NAME: ${{ steps.check-params.outputs.NOME }}
 
 
 
