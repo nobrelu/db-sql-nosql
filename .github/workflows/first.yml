@@ -41,8 +41,7 @@ jobs:
           template-path: .github/ISSUE_TEMPLATE/teste.yml # optional but recommended
 
       - name: Print the fields
-        run: 
-          # echo "${PARSER_FIELDS}"
+        run: |
           echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
           echo  "teste_contact=$(echo '${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
           echo  "teste1_contact='${{ fromJSON(steps.issue-parser.outputs.jsonString).contact}}')" >> $GITHUB_ENV
@@ -51,7 +50,7 @@ jobs:
           
       - name: Check params
         id: check-params
-        run:
+        run: |
           echo "CONTATO= ${{ fromJSON(steps.issue-parser.outputs.jsonString).contact }} " >> $GITHUB_OUTPUT
           echo "NOME= ${{ fromJSON(steps.issue-parser.outputs.jsonString).nome }}" >> $GITHUB_OUTPUT
          
