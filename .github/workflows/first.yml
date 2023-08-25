@@ -52,6 +52,7 @@ jobs:
           else
             echo ""WARNING_BODY=- [x] enter the contact Name." >> $GITHUB_OUTPUT
             echo "CONTACT_NAME=${CONTACT}" >> $GITHUB_OUTPUT
+          fi
         env: 
           CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
 
@@ -61,5 +62,3 @@ jobs:
           echo "CONTATO= ${{ steps.check-params.outputs.CONTACT_NAME }}" >> $GITHUB_OUTPUT
         env: 
           CONTACT: ${{ steps.check-params.outputs.CONTACT_NAME }}
-        
-     
