@@ -24,6 +24,6 @@ jobs:
         id: hello
         run: echo "hello adele"
       - name: goodbye
-        id: hello
+        id: bye
         run: echo "bye adele"    
 
