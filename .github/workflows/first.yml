@@ -8,22 +8,58 @@ on:
     types:
       - closed
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+  #workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  process-issue:
-    # The type of runner that the job will run on
+  
+  issue-automation:
+    if:  ${{ contains(github.event.issue.labels.*.name, 'auto')  }}
+    
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    #env: 
+      #algo    
+   
     steps:
+      - uses: actions/checkout@v3
       - name: print hello
         id: hello
         run: echo "hello adele"
       - name: goodbye
         id: bye
         run: echo "bye adele"    
+      - name: teste
+        id: teste
+        run: |
+          echo "First output"
+          echo "Second output"
+      - name: Parse Issue Form
+        uses: stefanbuck/github-issue-parser@v3
+        id: issue-parser
+        with:
+          template-path: .github/ISSUE_TEMPLATE/teste.yml # optional but recommended
 
+      - name: Print the fields
+        run: echo "${PARSER_FIELDS}"
+        env:
+          PARSER_FIELDS: ${{ steps.issue-parser.outputs.jsonString }}
+          
+      - name: Check params
+        id: check-params
+        run:
+          if [ "${contact}" == ""]; then
+            echo "WARNING= - [] sem contact" >> GITHUB_OUTPUT
+            echo  "CONTACT_NAME= meu_contato" >> $GITHUB_OUTPUT
+          else
+            echo ""WARNING_BODY=- [x] enter the contact Name." >> $GITHUB_OUTPUT
+            echo "CONTACT_NAME=${CONTACT}" >> $GITHUB_OUTPUT
+        env: 
+          CONTACT: ${{ steps.issue-parser.outputs.issueparser_contact }}
+
+      - name: Define Params
+        id: params-defined
+        run:
+          echo "CONTATO= ${{ steps.check-params.outputs.CONTACT_NAME }}" >> $GITHUB_OUTPUT
+        env: 
+          CONTACT: ${{ steps.check-params.outputs.CONTACT_NAME }}
+        
+     
