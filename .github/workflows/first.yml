@@ -93,7 +93,18 @@ jobs:
           NAME: ${{ steps.check-params.outputs.NOME }}
           #teste: ${{ fromJSON(steps.check-params.outputs.result).nome }} 
 
-
+      - name: Teste Params Env
+        uses: actions/github-script@v6
+        env: 
+          CONTACT: ${{ steps.get-contact.outputs.CONTATO}}
+          NAME: ${{  steps.get-name.outputs.NOME }}
+        with:
+          script: |
+            var contact = process.env.CONTACT;
+            var name =  process.env.NAME;
+          
+      
+          
 
 
 
