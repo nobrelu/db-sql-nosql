@@ -1,15 +1,10 @@
 ---
 name: test-template-issue
 about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
----
-
-
+title: 'Teste'
+labels: 'auto'
 body:
-  - type: text
+  - type: textarea
   id: teste
   attributes:
     label: Description of problem
