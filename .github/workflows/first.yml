@@ -60,11 +60,33 @@ jobs:
           NAME: ${{ fromJSON(steps.issue-parser.outputs.jsonString).nome }}
           #ISSUE_FORM: ${{ steps.issue-parser.outputs.jsonString }}
 
+      - name: Get Contact
+        id: get-contact
+        run: 
+          echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
+        env: 
+          CONTACT: ${{ steps.check-params.outputs.CONTATO }}
+
+      - name: Get Name
+        id: get-name
+        run: 
+          echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
+        env: 
+          NAME: ${{ steps.check-params.outputs.NOME }}
+
+      - name: Define Params2
+        id: params-defined2
+        run: | 
+          echo "CONTATO= ${{ steps.get-contact.outputs.CONTATO }}" >> $GITHUB_OUTPUT
+          echo "NOME= ${{ steps.get-name.outputs.NOME }}" >> $GITHUB_OUTPUT
+        env: 
+          CONTACT: ${{ steps.get-contact.outputs.CONTATO}}
+          NAME: ${{  steps.get-name.outputs.NOME }}
+          #teste: ${{ fromJSON(steps.check-params.outputs.result).nome }}    
           
       - name: Define Params
         id: params-defined
-        run:
-          #echo "teste= ${{ fromJSON(steps.check-params.outputs.result).nome }} >> $GITHUB_OUTPUT
+        run: | 
           echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
           echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
         env: 
