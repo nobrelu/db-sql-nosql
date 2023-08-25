@@ -60,13 +60,13 @@ jobs:
       - name: Define Params
         id: params-defined
         run:
-          echo "teste= ${{ fromJSON(steps.check-params.outputs.CONTATO).nome }} >> $GITHUB_OUTPUT
+          echo "teste= ${{ fromJSON(steps.check-params.outputs.result).nome }} >> $GITHUB_OUTPUT
           echo "CONTATO= ${{ steps.check-params.outputs.CONTATO }}" >> $GITHUB_OUTPUT
           echo "NOME= ${{ steps.check-params.outputs.NOME }}" >> $GITHUB_OUTPUT
         env: 
           CONTACT: ${{ steps.check-params.outputs.CONTATO }}
           NAME: ${{ steps.check-params.outputs.NOME }}
-          teste: ${{ fromJSON(steps.check-params.outputs.CONTATO).nome }} 
+          teste: ${{ fromJSON(steps.check-params.outputs.result).nome }} 
 
 
 
