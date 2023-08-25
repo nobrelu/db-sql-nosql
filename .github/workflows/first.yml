@@ -44,9 +44,9 @@ jobs:
           PARSER_FIELDS: ${{ steps.issue-parser.outputs.jsonString }}
           
       - name: Check params
-        #uses: actions/github-script@v6
+        uses: actions/github-script@v6
         id: check-params
-        run:          
+        with:          
           const issueForm = JSON.parse(process.env.ISSUE_FORM)
           const CONTATO = issueForm.contact
           const NOME = issueForm.nome
